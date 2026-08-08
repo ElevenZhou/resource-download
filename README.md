@@ -7,30 +7,38 @@
 发现目录 → 入库 SQLite → 队列 claim → 并发下载 → 本地媒体 + 台账
 ```
 
+**GitHub：** https://github.com/ElevenZhou/resource-download
+
+```bash
+git clone https://github.com/ElevenZhou/resource-download.git
+cd resource-download
+
+# Playbox（图/封面/视频，仅 Python 标准库）
+./scripts/playbox crawl --pages 1 --max-items 10
+./scripts/playbox download --workers 2
+
+# GoodShort（短剧 HLS，需系统 ffmpeg）
+# brew install ffmpeg
+./scripts/gsdl --help
+```
+
+本地下载与 SQLite **不入库**（见 `.gitignore`），每人 clone 后自行生成。
+
 ---
 
 ## 目录结构
 
 ```text
 资源下载/
-├── README.md                      # 本文件（总览）
+├── README.md
 ├── requirements.txt
-├── core/                          # 跨 case 共享（路径、ffmpeg 探测…）
-├── cases/                         # ★ 每个案例一个子文件夹
-│   ├── goodshort/                 # GoodShort 短剧（已落地）
-│   │   ├── README.md              # 站点方案与完整用法
-│   │   ├── gsdl/                  # CLI 包
-│   │   ├── data/                  # 片库 DB、目录 TSV
-│   │   └── downloads/             # MP4 输出
-│   └── shortmax/                  # ShortMax（方案已探查）
-│       └── README.md
+├── core/
+├── cases/
+│   ├── goodshort/     # 短剧 gsdl（已落地）
+│   ├── playbox/       # AI 图/视频 pbdl（已落地）
+│   └── shortmax/      # 方案已探查
 ├── docs/
-│   ├── architecture/overview.md   # 架构与扩展约定
-│   ├── research/obscura.md        # Obscura 无头浏览器调研
-│   └── share/                     # 可分享调研页
-└── scripts/
-    ├── gsdl                       # 根目录启动 GoodShort CLI
-    └── list-cases
+└── scripts/           # gsdl / playbox / list-cases
 ```
 
 架构细节：[`docs/architecture/overview.md`](docs/architecture/overview.md)
