@@ -1,0 +1,11 @@
+# Multi-case resource crawler / batch downloader.
+# Default stack uses Python stdlib + system ffmpeg only.
+#
+# Per-case notes:
+#   cases/goodshort  — no pip deps (urllib + sqlite3 + ffmpeg)
+#   cases/shortmax   — planned; may need cryptography for AES
+#
+# Optional later (global or per-case):
+#   cryptography   # ShortMax ts AES
+#   httpx          # async HTTP
+#   rich           # TUI progress

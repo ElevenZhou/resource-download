@@ -1,0 +1,36 @@
+# macOS / editors
+.DS_Store
+**/.DS_Store
+.idea/
+.vscode/
+*.swp
+*~
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.egg-info/
+.venv/
+venv/
+.env
+.env.*
+
+# Local media (do not publish)
+cases/*/downloads/**
+!cases/*/downloads/.gitkeep
+*.mp4
+*.part.mp4
+*.webm
+*.ts
+*.m3u8
+*.mkv
+
+# Local SQLite libraries & runtime exports
+cases/*/data/*.db
+cases/*/data/*.db-*
+cases/*/data/exports/**
+!cases/*/data/exports/.gitkeep
+
+# Optional local tool binaries
+tools/bin/

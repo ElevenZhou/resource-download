@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+# List case directories under cases/
+set -euo pipefail
+ROOT="$(cd "$(dirname "$0")/.." && pwd)"
+echo "cases under: ${ROOT}/cases"
+for d in "${ROOT}/cases"/*/; do
+  [ -d "$d" ] || continue
+  name="$(basename "$d")"
+  if [ -f "${d}README.md" ]; then
+    status="$(grep -m1 -E '^\| 状态' "${d}README.md" 2>/dev/null || true)"
+    echo "  - ${name}  ${status:-}"
+  else
+    echo "  - ${name}"
+  fi
+done

@@ -1,0 +1,677 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>短剧资源调研 · Telegram / 免费平台 / 订阅无限看</title>
+  <meta name="description" content="短剧（原版英文 / 英文配音）Telegram 频道调研，以及全免费与订阅无限看平台对比。内部研究备忘。" />
+  <style>
+    :root {
+      --bg: #f4f6f9;
+      --bg-elevated: #ffffff;
+      --bg-soft: #f0f3f8;
+      --border: rgba(15, 23, 42, 0.10);
+      --text: #1a2332;
+      --muted: #5b677a;
+      --accent: #2563eb;
+      --accent-2: #0d9488;
+      --warn: #b45309;
+      --danger: #c2410c;
+      --ok: #15803d;
+      --radius: 14px;
+      --shadow: 0 10px 30px rgba(15, 23, 42, 0.06);
+      --max: 920px;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC",
+        "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+      background:
+        radial-gradient(1200px 600px at 10% -10%, rgba(37, 99, 235, 0.08), transparent 55%),
+        radial-gradient(900px 500px at 100% 0%, rgba(13, 148, 136, 0.06), transparent 45%),
+        var(--bg);
+      color: var(--text);
+      line-height: 1.65;
+      font-size: 16px;
+    }
+
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    .wrap {
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 28px 18px 80px;
+    }
+
+    header.hero {
+      background: linear-gradient(145deg, #ffffff, #f8fafc);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 28px 24px 22px;
+      box-shadow: var(--shadow);
+      margin-bottom: 22px;
+    }
+
+    .badge-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 14px;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 12px;
+      letter-spacing: 0.02em;
+      padding: 4px 10px;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      background: #fff;
+      color: var(--muted);
+    }
+
+    .badge.ok {
+      color: var(--ok);
+      border-color: rgba(21, 128, 61, 0.28);
+      background: rgba(21, 128, 61, 0.06);
+    }
+    .badge.warn {
+      color: var(--warn);
+      border-color: rgba(180, 83, 9, 0.28);
+      background: rgba(180, 83, 9, 0.06);
+    }
+    .badge.danger {
+      color: var(--danger);
+      border-color: rgba(194, 65, 12, 0.28);
+      background: rgba(194, 65, 12, 0.06);
+    }
+
+    h1 {
+      margin: 0 0 10px;
+      font-size: clamp(1.45rem, 3.5vw, 1.9rem);
+      line-height: 1.25;
+      letter-spacing: -0.02em;
+      color: #0f172a;
+    }
+
+    .lead {
+      margin: 0;
+      color: var(--muted);
+      font-size: 0.98rem;
+      max-width: 62ch;
+    }
+
+    .meta {
+      margin-top: 16px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px 18px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    nav.toc {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      backdrop-filter: blur(12px);
+      background: rgba(255, 255, 255, 0.88);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 12px 14px;
+      margin-bottom: 22px;
+      box-shadow: 0 4px 16px rgba(15, 23, 42, 0.04);
+    }
+
+    nav.toc strong {
+      display: block;
+      font-size: 12px;
+      color: var(--muted);
+      margin-bottom: 8px;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+
+    nav.toc .links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    nav.toc a {
+      font-size: 13px;
+      padding: 5px 10px;
+      border-radius: 999px;
+      background: var(--bg-soft);
+      border: 1px solid var(--border);
+      color: var(--text);
+      text-decoration: none;
+    }
+
+    nav.toc a:hover {
+      border-color: rgba(37, 99, 235, 0.35);
+      color: var(--accent);
+      background: rgba(37, 99, 235, 0.06);
+    }
+
+    section {
+      background: var(--bg-elevated);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 22px 20px;
+      margin-bottom: 16px;
+      box-shadow: var(--shadow);
+    }
+
+    section h2 {
+      margin: 0 0 12px;
+      font-size: 1.2rem;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: #0f172a;
+    }
+
+    section h2 .num {
+      width: 28px;
+      height: 28px;
+      border-radius: 8px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 13px;
+      font-weight: 700;
+      background: rgba(37, 99, 235, 0.10);
+      color: var(--accent);
+      flex-shrink: 0;
+    }
+
+    h3 {
+      margin: 20px 0 8px;
+      font-size: 1.02rem;
+      color: #1e293b;
+    }
+
+    p { margin: 0 0 12px; }
+    p, li { color: #334155; }
+    ul, ol { margin: 0 0 12px; padding-left: 1.2em; }
+    li { margin: 0.28em 0; }
+
+    .callout {
+      border-radius: 12px;
+      padding: 12px 14px;
+      margin: 12px 0 14px;
+      border: 1px solid var(--border);
+      background: var(--bg-soft);
+      color: var(--muted);
+      font-size: 0.94rem;
+    }
+
+    .callout.warn {
+      border-color: rgba(180, 83, 9, 0.25);
+      background: #fffbeb;
+      color: #92400e;
+    }
+
+    .callout.danger {
+      border-color: rgba(194, 65, 12, 0.25);
+      background: #fff7ed;
+      color: #9a3412;
+    }
+
+    .callout.ok {
+      border-color: rgba(21, 128, 61, 0.25);
+      background: #f0fdf4;
+      color: #166534;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.92rem;
+      margin: 10px 0 14px;
+      overflow: hidden;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+      background: #fff;
+    }
+
+    th, td {
+      text-align: left;
+      padding: 10px 12px;
+      border-bottom: 1px solid var(--border);
+      vertical-align: top;
+    }
+
+    th {
+      background: #f8fafc;
+      color: #334155;
+      font-weight: 600;
+      white-space: nowrap;
+    }
+
+    tr:last-child td { border-bottom: none; }
+    tr:nth-child(even) td { background: #fafbfc; }
+    td { color: #334155; }
+
+    code, .mono {
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      font-size: 0.86em;
+      background: #eef2f7;
+      color: #1e293b;
+      padding: 1px 6px;
+      border-radius: 6px;
+    }
+
+    pre {
+      background: #f8fafc;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 12px 14px;
+      overflow-x: auto;
+      font-size: 0.86rem;
+      line-height: 1.5;
+      color: #1e293b;
+    }
+
+    .grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+
+    @media (max-width: 720px) {
+      .grid-2 { grid-template-columns: 1fr; }
+      table { display: block; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+      th { white-space: normal; }
+    }
+
+    .card {
+      background: var(--bg-soft);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 14px;
+    }
+
+    .card h4 {
+      margin: 0 0 6px;
+      font-size: 0.98rem;
+      color: #0f172a;
+    }
+
+    .card p {
+      margin: 0;
+      font-size: 0.9rem;
+      color: var(--muted);
+    }
+
+    footer {
+      margin-top: 8px;
+      color: var(--muted);
+      font-size: 12px;
+      text-align: center;
+      padding: 18px 8px 0;
+    }
+
+    .actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 16px;
+    }
+
+    .btn {
+      appearance: none;
+      border: 1px solid rgba(37, 99, 235, 0.25);
+      background: rgba(37, 99, 235, 0.08);
+      color: var(--accent);
+      border-radius: 10px;
+      padding: 8px 14px;
+      font-size: 13px;
+      cursor: pointer;
+      font-family: inherit;
+    }
+
+    .btn:hover { background: rgba(37, 99, 235, 0.14); }
+    .btn.secondary {
+      background: #fff;
+      border-color: var(--border);
+      color: var(--muted);
+    }
+
+    .tg-link {
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      font-size: 0.88em;
+    }
+
+    @media print {
+      body { background: #fff; }
+      nav.toc { position: static; }
+      .actions { display: none; }
+      section, header.hero { box-shadow: none; }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header class="hero">
+      <div class="badge-row">
+        <span class="badge">内部研究备忘</span>
+        <span class="badge ok">可分享</span>
+        <span class="badge warn">含版权风险说明</span>
+        <span class="badge">2026-07-19</span>
+      </div>
+      <h1>短剧资源调研：Telegram 群 / 全免费平台 / 订阅无限看</h1>
+      <p class="lead">
+        聚焦<strong>原版英文</strong>与<strong>英文配音 / 英字</strong>竖屏短剧（micro-drama）。
+        汇总公开可查的 Telegram 频道线索，以及全网免费 / 订阅类平台对比，便于同事快速对齐信息。
+      </p>
+      <div class="meta">
+        <span>范围：Telegram · App · YouTube · 订阅制</span>
+        <span>结论摘要：TG 有货但多盗版；真正全免费少；订阅需核对权益页</span>
+      </div>
+      <div class="actions">
+        <button class="btn" type="button" onclick="copyPageLink()">复制本页链接</button>
+        <button class="btn secondary" type="button" onclick="window.print()">打印 / 存 PDF</button>
+      </div>
+    </header>
+
+    <nav class="toc" aria-label="目录">
+      <strong>目录</strong>
+      <div class="links">
+        <a href="#summary">结论摘要</a>
+        <a href="#telegram">Telegram</a>
+        <a href="#free">免费平台</a>
+        <a href="#sub">订阅无限看</a>
+        <a href="#choose">怎么选</a>
+        <a href="#next">建议下一步</a>
+        <a href="#disclaimer">免责声明</a>
+      </div>
+    </nav>
+
+    <section id="summary">
+      <h2><span class="num">0</span>一句话结论</h2>
+      <div class="grid-2">
+        <div class="card">
+          <h4>Telegram</h4>
+          <p><strong>有大量</strong> DramaBox / ReelShort / GoodShort / ShortMax 等「全集分享」频道，英字/英配为主；原生英文与中文剧常混在一起。多为未授权搬运，封号、钓鱼、木马风险高，不适合当稳定正规片源。</p>
+        </div>
+        <div class="card">
+          <h4>免费 / 订阅</h4>
+          <p>主流短剧 App 基本是<strong>前几集免费 + 金币</strong>。相对更「尽量免费」的是 <strong>PineDrama（TikTok）</strong> 与 <strong>YouTube</strong>；想「付一次尽量多看」优先核对 <strong>DramaBox / ReelShort 订阅权益原文</strong>，别默认 VIP = 全站无限。</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="telegram">
+      <h2><span class="num">1</span>Telegram：分享短剧的群 / 频道</h2>
+
+      <div class="callout warn">
+        下列链接来自公开网页索引，频道可能迁移、改名或被封。加入前请自行判断；不要下载不明 APK，不要支付「进群费」。
+      </div>
+
+      <h3>1.1 公开出现过的入口（示例）</h3>
+      <table>
+        <thead>
+          <tr>
+            <th>入口</th>
+            <th>备注</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><a class="tg-link" href="https://t.me/ShortDramafree" target="_blank" rel="noopener">t.me/ShortDramafree</a></td>
+            <td>标 DramaBox / ShortMax / GoodShort / NetShort，体量较大</td>
+          </tr>
+          <tr>
+            <td><a class="tg-link" href="https://t.me/Alldramashort" target="_blank" rel="noopener">t.me/Alldramashort</a></td>
+            <td>DramaBox / ReelShort / ShortMax 等「下载 / 分享」类群</td>
+          </tr>
+          <tr>
+            <td><a class="tg-link" href="https://t.me/dramashortsseries" target="_blank" rel="noopener">t.me/dramashortsseries</a></td>
+            <td>自称 free short series；常附备用频道</td>
+          </tr>
+          <tr>
+            <td><a class="tg-link" href="https://t.me/dramaflixshort" target="_blank" rel="noopener">t.me/dramaflixshort</a></td>
+            <td>标签常见 #englishdrama #shortsdrama</td>
+          </tr>
+          <tr>
+            <td><span class="tg-link">@shortseriesdramacollection</span></td>
+            <td>目录站收录过 FREE SHORT DRAMAS（Kalos / DramaBox / GoodShort / ReelShort…）</td>
+          </tr>
+          <tr>
+            <td>Facebook 群 → 导 TG</td>
+            <td>如 REELSHORT &amp; DRAMABOX DRAMAS，文案多为 FULL + English subtitles → join Telegram</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h3>1.2 在 TG 内可搜的关键词</h3>
+      <pre>short drama free
+DramaBox full
+ReelShort English
+English dubbed short drama
+playlet free complete</pre>
+
+      <h3>1.3 内容类型对照</h3>
+      <table>
+        <thead>
+          <tr>
+            <th>类型</th>
+            <th>TG 上情况</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>英文配音 / 英字竖屏短剧</td>
+            <td>最多；多为中文 / 亚洲 micro-drama 的字幕或配音资源</td>
+          </tr>
+          <tr>
+            <td>原生英文短剧（如 ReelShort 原版）</td>
+            <td>有，但常与上类混在同一频道；少见「纯官方 native English 合集」</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h3>1.4 风险（务必读）</h3>
+      <ul>
+        <li><strong>版权</strong>：绝大多数是未授权全集搬运，随时被封。</li>
+        <li><strong>安全</strong>：外链盘、APK、「付费进 VIP 群」中木马 / 钓鱼常见。</li>
+        <li><strong>质量</strong>：残缺合集、错剧名、低清、广告机器人。</li>
+        <li><strong>工程价值</strong>：不适合作为合规、可自动化的稳定上游片源。</li>
+      </ul>
+
+      <div class="callout danger">
+        研究结论可以分享；请勿把本页当成「盗版资源导航」传播，也不建议公司内部批量依赖 TG 未授权内容。
+      </div>
+    </section>
+
+    <section id="free">
+      <h2><span class="num">2</span>全网：更接近「全免费」的平台</h2>
+      <p>竖屏短剧商业模型普遍是「前几集免费 + 金币 / 周卡」。几乎没有「与 ReelShort 同量级片库、永久全站 0 付费」的正经平台。</p>
+
+      <table>
+        <thead>
+          <tr>
+            <th>平台</th>
+            <th>模式</th>
+            <th>英文 / 英配</th>
+            <th>说明</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><a href="https://shortdrama.tiktok.com/" target="_blank" rel="noopener">PineDrama</a><br /><span style="color:var(--muted);font-size:12px">TikTok 官方短剧 App</span></td>
+            <td>现阶段主打免费、少广告 / 无付费墙</td>
+            <td>有英文区内容</td>
+            <td>用户评价常见 “no paywall”；<strong>不保证永久</strong>（增长后可能改收费）。目前最值得先试的「尽量免费」官方选项之一。</td>
+          </tr>
+          <tr>
+            <td><strong>YouTube</strong></td>
+            <td>免费 + 广告</td>
+            <td>英字 / 英配频道多</td>
+            <td>官方号常放片段引流 App；也有整部上传。可搜剧名 + full / English dub。部分频道后半段要 Channel Membership。</td>
+          </tr>
+          <tr>
+            <td>FreeShort 等「Free」字号 App</td>
+            <td>宣称 free</td>
+            <td>有</td>
+            <td>名称 ≠ 真全免费，需看是否后期锁集。</td>
+          </tr>
+          <tr>
+            <td>Dailymotion 等 UGC</td>
+            <td>免费</td>
+            <td>零散整剧</td>
+            <td>搜剧名即可；质量与版权参差。</td>
+          </tr>
+          <tr>
+            <td>Bilibili 国际版等</td>
+            <td>部分免费</td>
+            <td>英字中长剧更多</td>
+            <td>更偏常规剧，不完全是竖屏 micro-drama。</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="callout ok">
+        若目标是「尽量正规 + 少付费」：优先试 <strong>PineDrama</strong>，再用 YouTube 补剧名搜索。
+      </div>
+
+      <h3>容易踩坑的「伪免费」</h3>
+      <ul>
+        <li>App 名带 Free，实际仍锁后半部</li>
+        <li>Web「全集站」（如部分宣称 free full episodes 的站点）：版权与可持续性不明，宜当灰产站看待</li>
+        <li>网上「免费看全集教程」大量指向盗链 / 搬运，有法律与账号风险</li>
+      </ul>
+    </section>
+
+    <section id="sub">
+      <h2><span class="num">3</span>「订阅无限看」类平台</h2>
+      <p>价格与权益会变，下表为公开报道 / 对比文中的<strong>量级参考</strong>，以下载 App 内权益页为准。</p>
+
+      <table>
+        <thead>
+          <tr>
+            <th>平台</th>
+            <th>大致模式</th>
+            <th>备注</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>DramaBox</strong></td>
+            <td>周卡 / 年卡 + 金币；有文写约 $5.99/周 或 ~$50/年 量级</td>
+            <td>相对更推订阅；是否「真无限全库」以 App 为准</td>
+          </tr>
+          <tr>
+            <td><strong>ReelShort</strong></td>
+            <td>VIP 偏贵（有文写约 $19.99/周 或 ~$200/年）+ 强金币</td>
+            <td>原生英文内容多；按币买全集很贵</td>
+          </tr>
+          <tr>
+            <td><strong>MyDrama</strong> 等</td>
+            <td>App + YouTube 会员看续集</td>
+            <td>更像「会员解锁后续集」</td>
+          </tr>
+          <tr>
+            <td><strong>ShortMax / GoodShort / NetShort</strong></td>
+            <td>金币为主 + 订阅 / 充值入口</td>
+            <td>GoodShort 实测多为<strong>按集金币</strong>；会员别默认 = 全站</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h3>开订阅前核对三句话</h3>
+      <ol>
+        <li>是<strong>全站无限</strong>，还是折扣 / 去广告 / 每日送币？</li>
+        <li>是否包含<strong>新剧 / 热剧</strong>？</li>
+        <li>你所在地区是否有<strong>版权限制</strong>？</li>
+      </ol>
+
+      <div class="callout">
+        要大量看、不想一集一集充 → 优先比 <strong>DramaBox 类年 / 周订阅</strong>。<br />
+        要原生英文 → <strong>ReelShort</strong> 内容强，但 VIP 往往更贵。
+      </div>
+    </section>
+
+    <section id="choose">
+      <h2><span class="num">4</span>按目标怎么选</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>目标</th>
+            <th>更靠谱路径</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>原生英文短剧</td>
+            <td>ReelShort（付费 / VIP）；YouTube 官方片段 + App；PineDrama 看是否有同向内容</td>
+          </tr>
+          <tr>
+            <td>英文配音 / 英字竖屏</td>
+            <td>YouTube 搜剧名 + full / English dub；DramaBox / ShortMax / GoodShort App</td>
+          </tr>
+          <tr>
+            <td>尽量不花钱</td>
+            <td>① PineDrama ② YouTube ③ 各 App 免费集 + 看广告换币（有限）</td>
+          </tr>
+          <tr>
+            <td>花钱但省心多看</td>
+            <td>先比 DramaBox / ReelShort 订阅页原文权益，再开周卡试一周</td>
+          </tr>
+          <tr>
+            <td>Telegram 合集</td>
+            <td>能搜到，但偏盗版 + 风险；不建议当主渠道，也不适合自动化下载管线</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section id="next">
+      <h2><span class="num">5</span>建议同事可执行的下一步</h2>
+      <ol>
+        <li>安装 <strong>PineDrama</strong>，刷 2～3 部，确认是否真无锁集。</li>
+        <li>DramaBox / ReelShort 各打开订阅页，截图对比权益与价格。</li>
+        <li>YouTube 搜索：<code>English dubbed short drama full</code> 或「剧名 + full episodes」。</li>
+        <li>若只想在 TG 扫一眼内容类型：从第 1 节公开链接进入，<strong>不要下不明 APK、不要付进群费</strong>。</li>
+      </ol>
+    </section>
+
+    <section id="disclaimer">
+      <h2><span class="num">6</span>免责声明</h2>
+      <ul>
+        <li>本文为公开信息调研备忘，链接与价格可能随时变化。</li>
+        <li>不鼓励、不协助未授权传播受版权保护的内容。</li>
+        <li>加入第三方群组、下载外链文件的安全与法律责任由使用者自行承担。</li>
+        <li>正式采购 / 商务合作请走官方渠道与法务评估。</li>
+      </ul>
+    </section>
+
+    <footer>
+      短剧资源调研备忘 · 生成日期 2026-07-19 · 仅供内部信息对齐
+    </footer>
+  </div>
+
+  <script>
+    function copyPageLink() {
+      const url = location.href;
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(url).then(function () {
+          alert("已复制链接：\n" + url);
+        }).catch(function () {
+          prompt("复制下面的链接：", url);
+        });
+      } else {
+        prompt("复制下面的链接：", url);
+      }
+    }
+  </script>
+</body>
+</html>

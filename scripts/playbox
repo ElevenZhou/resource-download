@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+# Launch Playbox CLI (cases/playbox) from repo root.
+set -euo pipefail
+ROOT="$(cd "$(dirname "$0")/.." && pwd)"
+export PYTHONPATH="${ROOT}/cases/playbox${PYTHONPATH:+:$PYTHONPATH}"
+exec python3 -m pbdl "$@"
